@@ -36,7 +36,7 @@ services:
     ui:
         build: ./ui
         ports:
-            - "6000:3000"
+            - "7777:80"
 
 volumes:
     db_data: {}
