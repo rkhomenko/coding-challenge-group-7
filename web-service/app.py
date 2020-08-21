@@ -97,3 +97,25 @@ def get_resource():
 @app.route('/')
 def hello_world():
     return 'Web service'
+
+
+@app.route('/testsetup')
+def test_setup():
+    username = 'user'
+    password = 'pass'
+    if username is None or password is None:
+        abort(400)    # missing arguments
+    if User.query.filter_by(username=username).first() is not None:
+        abort(400)    # existing user
+    user = User(username=username)
+    user.hash_password(password)
+    db.session.add(user)
+    db.session.commit()
+    return (jsonify({'username': user.username}), 201,
+            {'Location': url_for('get_user', id=user.id, _external=True)})
+
+
+if __name__ == '__main__':
+    if not os.path.exists('db.sqlite'):
+        db.create_all()
+    app.run(debug=True)
