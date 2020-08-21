@@ -28,5 +28,10 @@ services:
             DB_NAME: data
             DB_PASSWORD: db_password
 
+    ui:
+        build: ./ui
+        ports:
+            - "6000:3000"
+
 volumes:
     db_data: {}
