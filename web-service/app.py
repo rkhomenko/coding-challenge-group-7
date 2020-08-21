@@ -1,15 +1,24 @@
 import os
 import time
+
 from flask import Flask, abort, request, jsonify, g, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_httpauth import HTTPBasicAuth
 import jwt
 from werkzeug.security import generate_password_hash, check_password_hash
 
+# Get db params
+db_host = os.environ['DB_HOST']
+db_name = os.environ['DB_NAME']
+db_user = os.environ['DB_USER']
+db_password = os.environ['DB_PASSWORD']
+conn_url = f'mysql+pymysql://{db_user}:{db_password}@{db_host}/{db_name}'
+
+
 # initialization
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'how many wood could a woodchuck chuck if a woodchuck would chuck wood'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = conn_url
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
 # extensions

@@ -15,6 +15,11 @@ services:
         build: ./web-service
         ports:
             - "5000:5000"
+        environment:
+            DB_HOST: db:3306
+            DB_USER: db_user
+            DB_NAME: web
+            DB_PASSWORD: db_password
 
     data-service:
         depends_on:
