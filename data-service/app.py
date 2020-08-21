@@ -2,7 +2,6 @@ import os
 
 from flask import Flask
 import sqlalchemy as db
-import requests
 
 app = Flask(__name__)
 
@@ -19,7 +18,3 @@ print('Engine created')
 @app.route('/')
 def hello_world():
     return 'Data service'
-
-@app.route('/login', methods=['POST'])
-def login():
-  pass
