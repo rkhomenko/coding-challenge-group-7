@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import axios from 'axios';
+import axios, {AxiosError, AxiosResponse} from 'axios';
 
-const LOGINURL = `http://localhost:4000/login`;
+const LOGINURL = `http://localhost:5000/api/users`;
 
 const LoginBar = props => {
     const [username, setUsername] = useState("");
@@ -18,12 +18,15 @@ const LoginBar = props => {
         event.preventDefault();
         let cred = {username: username, password: password};
         try {
-            const res = await axios.post(LOGINURL, cred);
-            const suc = await res.data;
-            props.loginHandler(suc === true);
-          } catch (e) {
+            await axios.post(LOGINURL, cred)
+                .then((response) => {
+                    console.log(response.data);
+                    console.log(response.status);
+                })
+        } catch (e) {
+            console.log(e);
             props.loginHandler(false);
-          }
+        }
     };
 
     return (
