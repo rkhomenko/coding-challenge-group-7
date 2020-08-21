@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import LoginBar from './Components/LoginBar';
+import MainPage from './Components/MainPage/MainPage';
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
@@ -17,7 +18,12 @@ function App() {
     <p>Logged</p>
   );
 
-  return (isLogged ?  loggedForm : loginForm);
+  return (
+    <>
+    { isLogged ?  loggedForm : loginForm }
+    <MainPage/>
+    </>
+    );
 }
 
 export default App;
