@@ -1,13 +1,23 @@
-import React from 'react';
-import './App.css';
-import LoginBar from './LoginBar';
+import React, {useState} from 'react';
+import LoginBar from './Components/LoginBar';
 
 function App() {
-  return (
-    <div>
-      <LoginBar/>
-    </div>
+  const [isLogged, setIsLogged] = useState(false);
+
+  const loginHandler = isLog => {
+    setIsLogged(isLog);
+  };
+
+  const loginForm = (
+    <LoginBar
+      loginHandler={loginHandler}
+    />
   );
+  const loggedForm = (
+    <p>Logged</p>
+  );
+
+  return (isLogged ?  loggedForm : loginForm);
 }
 
 export default App;
