@@ -96,4 +96,4 @@ def get_resource():
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return 'Web service'
