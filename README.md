@@ -17,5 +17,5 @@ $ docker-compose stop
 
 Default ports:
  - ui: 7777
- - web-serice: 5000
+ - web-service: 5000
  - data-service: 5050
