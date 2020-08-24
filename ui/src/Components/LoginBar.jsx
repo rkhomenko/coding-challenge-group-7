@@ -29,7 +29,7 @@ const LoginBar = props => {
     return (
         <form onSubmit={handleSubmit}>
             <input
-                class="login"
+                class="form_input login"
                 type="text" 
                 placeholder="Login"
                 value={username}
@@ -37,7 +37,7 @@ const LoginBar = props => {
             />
             <br/>
             <input
-                class="password"
+                class="form_input password"
                 type="text" 
                 placeholder="Password"
                 value={password}
@@ -45,7 +45,7 @@ const LoginBar = props => {
             />
             <br/>
             <button
-                class="button"
+                class="form_input button"
                 type="submit">
                 Log In</button>
         </form>
