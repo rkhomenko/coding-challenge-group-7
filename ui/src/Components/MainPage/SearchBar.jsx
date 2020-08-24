@@ -20,14 +20,9 @@ import React from "react";
       alert(this.state.filterType);
     }
 
-    handleGetReportClick = () => {
-      alert("Here is your report!");
-    }
-
     render() {
       return (
         <>
-          <div>
           <div>
             <p>If you need to see specific information, please use filters below</p>
             <div>
@@ -36,14 +31,12 @@ import React from "react";
                   <option value='conterparty'>Conterparty</option>
                   <option value='price'>Price</option>
                 </select>
-                <input type="submit" value="Get report" onClick={this.handleGetReportClick}/>
             </div>
           </div>
           <div>
             <input type="text" value={this.state.filterText} onChange={this.handleFilterTextChanged} placeholder='Enter the search filter'/>
             <input type="submit" value="Search" onClick={this.handleSearchClick}/>
           </div>
-        </div>
        </>
       );
     }
