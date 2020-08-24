@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import LoginBar from './Components/LoginBar';
+import './App.css';
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
