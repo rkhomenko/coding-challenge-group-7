@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import axios, {AxiosError, AxiosResponse} from 'axios';
+import axios from 'axios';
 
 const LOGINURL = `http://localhost:5000/api/users`;
 
-const LoginBar = props => {
+const LoginPage = props => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -17,11 +17,17 @@ const LoginBar = props => {
     const handleSubmit = async event => {
         event.preventDefault();
         let cred = {username: username, password: password};
+        const headers = {
+             'Content-Type': 'application/json',
+             'Access-Control-Allow-Origin': '*',
+             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+        };
         try {
-            await axios.post(LOGINURL, cred)
+            await axios.post(LOGINURL, cred, {headers: headers})
                 .then((response) => {
                     console.log(response.data);
                     console.log(response.status);
+                    props.loginHandler(true);
                 })
         } catch (e) {
             console.log(e);
@@ -56,4 +62,4 @@ const LoginBar = props => {
 
 };
 
-export default LoginBar;
+export default LoginPage;

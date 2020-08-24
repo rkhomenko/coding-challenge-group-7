@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
-import LoginBar from './Components/LoginBar';
+
 import './App.css';
+import LoginPage from './Components/LoginPage/LoginPage';
+import MainPage from './Components/MainPage/MainPage'
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
@@ -9,16 +11,16 @@ function App() {
     setIsLogged(isLog);
   };
 
-  const loginForm = (
-    <LoginBar
+  const loginPage = (
+    <LoginPage
       loginHandler={loginHandler}
     />
   );
-  const loggedForm = (
-    <p>Logged</p>
+  const mainPage = (
+    <MainPage/>
   );
 
-  return (isLogged ?  loggedForm : loginForm);
+  return (isLogged ?  mainPage : loginPage);
 }
 
 export default App;
