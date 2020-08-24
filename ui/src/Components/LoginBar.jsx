@@ -28,21 +28,26 @@ const LoginBar = props => {
 
     return (
         <form onSubmit={handleSubmit}>
-            Username:
-            <input 
+            <input
+                class="form_input login"
                 type="text" 
-                placeholder="username" 
+                placeholder="Login"
                 value={username}
                 onChange={event => handleUsernameChange(event.target.value)}
             />
-            Password:
-            <input 
+            <br/>
+            <input
+                class="form_input password"
                 type="text" 
-                placeholder="password" 
+                placeholder="Password"
                 value={password}
                 onChange={event => handlePasswordChange(event.target.value)}
             />
-            <input type="submit" value="Submit"/>
+            <br/>
+            <button
+                class="form_input button"
+                type="submit">
+                Log In</button>
         </form>
     );
 
