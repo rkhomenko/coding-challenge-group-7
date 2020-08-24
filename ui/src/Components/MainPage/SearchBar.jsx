@@ -20,10 +20,6 @@ import React from "react";
       alert(this.state.filterType);
     }
 
-    handleGetReportClick = () => {
-      alert("Here is your report!");
-    }
-
     render() {
       return (
         <>  
@@ -38,9 +34,6 @@ import React from "react";
                   <option value='conterparty'>Conterparty</option>
                   <option value='price'>Price</option>
                 </select>
-              </div>
-              <div>
-                <input type="submit" value="Get report" onClick={this.handleGetReportClick}/>
               </div>
             </div>
           </div>

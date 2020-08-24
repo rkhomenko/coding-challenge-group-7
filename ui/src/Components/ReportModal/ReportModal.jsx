@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Modal, Button, Form} from 'react-bootstrap';
 import ChooseDealerBody from './ChooseDealerBody';
+import ReportBody from './ReportBody';
 
 const ReportModal = props => {
     const [showReport, setShowReport] = useState(false);
@@ -27,9 +28,9 @@ const ReportModal = props => {
             dealer={dealer}
         />);
     const reportBody = (
-        <div>
-            Report
-        </div>
+        <ReportBody
+            dealer={dealer}
+        />
     );
     const nextButton = (
         <Button variant="primary" onClick={handleNext}>

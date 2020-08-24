@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {Form} from 'react-bootstrap';
 
 const ChooseDealerBody = props => {
+    // axios request for dealers
+
     let dealers = [
         {name: "Anna", surname: "Agapova"},
         {name: "Ivan", surname: "Ivanov"}

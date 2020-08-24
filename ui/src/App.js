@@ -22,6 +22,7 @@ function App() {
   return (
     <>
     { isLogged ?  loggedForm : loginPage }
+    
     <MainPage/>
     </>
     );
