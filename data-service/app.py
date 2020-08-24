@@ -32,3 +32,17 @@ def stream():
             #nonlocal instrList
             yield rdd.create_random_data(instrList) + "\n"
     return Response(eventStream(), status=200, mimetype="text/event-stream")
+
+
+@app.route('/sse-stream')
+def sse_stream():
+    theHeaders = {"X-Accel-Buffering": "False"}
+    rdd = RandomDealData()
+    instrList = rdd.create_instrument_list()
+    def eventStream():
+        while True:
+            #nonlocal instrList
+            yield 'data:{}\n\n'.format(rdd.create_random_data(instrList))
+    resp = Response(eventStream(), status=200, mimetype="text/event-stream")
+    resp.headers["X-Accel-Buffering"] = "False"
+    return resp
