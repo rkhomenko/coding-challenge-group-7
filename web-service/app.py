@@ -22,6 +22,8 @@ app.config['SECRET_KEY'] = 'how many wood could a woodchuck chuck if a woodchuck
 app.config['SQLALCHEMY_DATABASE_URI'] = conn_url
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
+app.logger.info("Connection string:", conn_url)
+
 # extensions
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
