@@ -23,7 +23,6 @@ const MainPage = props => {
     return (
       <>
         <div><ReportModal/></div>
-
         <SearchBar/>
         <hr/>
         <DealDataTable deals={deals}/>
