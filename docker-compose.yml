@@ -14,7 +14,7 @@ services:
     db-web:
         image: mysql:5.7
         volumes:
-            - db_data:/var/lib/mysql
+            - db_web:/var/lib/mysql
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: password
@@ -52,4 +52,5 @@ services:
             - "7777:80"
 
 volumes:
+    db_web: {}
     db_data: {}

@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import axios from 'axios';
 
-const LOGINURL = `http://localhost:4000/login`;
+const LOGINURL = `http://localhost:5000/api/users`;
 
-const LoginBar = props => {
+const LoginPage = props => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -17,19 +17,28 @@ const LoginBar = props => {
     const handleSubmit = async event => {
         event.preventDefault();
         let cred = {username: username, password: password};
+        const headers = {
+             'Content-Type': 'application/json',
+             'Access-Control-Allow-Origin': '*',
+             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+        };
         try {
-            const res = await axios.post(LOGINURL, cred);
-            const suc = await res.data;
-            props.loginHandler(suc === true);
-          } catch (e) {
+            await axios.post(LOGINURL, cred, {headers: headers})
+                .then((response) => {
+                    console.log(response.data);
+                    console.log(response.status);
+                    props.loginHandler(true);
+                })
+        } catch (e) {
+            console.log(e);
             props.loginHandler(false);
-          }
+        }
     };
 
     return (
         <form onSubmit={handleSubmit}>
             <input
-                class="login"
+                class="form_input login"
                 type="text" 
                 placeholder="Login"
                 value={username}
@@ -37,7 +46,7 @@ const LoginBar = props => {
             />
             <br/>
             <input
-                class="password"
+                class="form_input password"
                 type="text" 
                 placeholder="Password"
                 value={password}
@@ -45,7 +54,7 @@ const LoginBar = props => {
             />
             <br/>
             <button
-                class="button"
+                class="form_input button"
                 type="submit">
                 Log In</button>
         </form>
@@ -53,4 +62,4 @@ const LoginBar = props => {
 
 };
 
-export default LoginBar;
+export default LoginPage;

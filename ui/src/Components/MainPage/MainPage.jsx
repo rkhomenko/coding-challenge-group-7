@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import SearchBar from './SearchBar';
 import DealDataTable from "./DealDataTable";
+import ReportModal from '../ReportModal/ReportModal';
 
-  class MainPage extends React.Component {
-    render() {
-      let deals = [
+const MainPage = props => {
+    let deals = [
         {
             instrument: "A",
             ctpy: "AA",
@@ -17,16 +17,18 @@ import DealDataTable from "./DealDataTable";
             price: 0,
             time: new Date('December 17, 1995 03:24:00')
         }      
-      ];
+    ];
 
-      return (
-        <>
-          <SearchBar/>
-          <hr/>
-          <DealDataTable deals={deals}/>
-        </>
-      );
-    }
-  }
   
-  export default MainPage;
+    return (
+      <>
+        <div><ReportModal/></div>
+
+        <SearchBar/>
+        <hr/>
+        <DealDataTable deals={deals}/>
+      </>
+    );
+}
+  
+export default MainPage;
