@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const LOGINURL = `http://localhost:5000/api/users`;
 
-const LoginBar = props => {
+const LoginPage = props => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -17,13 +17,22 @@ const LoginBar = props => {
     const handleSubmit = async event => {
         event.preventDefault();
         let cred = {username: username, password: password};
+        const headers = {
+             'Content-Type': 'application/json',
+             'Access-Control-Allow-Origin': '*',
+             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+        };
         try {
-            const res = await axios.post(LOGINURL, cred);
-            const suc = await res.data;
-            props.loginHandler(suc === true);
-          } catch (e) {
+            await axios.post(LOGINURL, cred, {headers: headers})
+                .then((response) => {
+                    console.log(response.data);
+                    console.log(response.status);
+                    props.loginHandler(true);
+                })
+        } catch (e) {
+            console.log(e);
             props.loginHandler(false);
-          }
+        }
     };
 
     return (
@@ -53,4 +62,4 @@ const LoginBar = props => {
 
 };
 
-export default LoginBar;
+export default LoginPage;

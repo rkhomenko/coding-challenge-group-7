@@ -15,16 +15,16 @@ class DealDataTable extends React.Component {
       }
 
       return (
-        <table>
+        <table class="main_table">
           <thead>
-            <tr>
+            <tr class="table_header">
               <th>Instrument</th>
               <th>Conterparty</th>
               <th>Price</th>
               <th>Time</th>
             </tr>
           </thead>
-          <tbody>{rows}</tbody>
+          <tbody class="table_row">{rows}</tbody>
         </table>
       );
     }
