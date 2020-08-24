@@ -2,10 +2,10 @@ version: '3'
 services:
     db:
         image: mysql:5.7
-        command: --init-file /var/lib/mysql/init.sql
+        command: --init-file /etc/init.sql
         volumes:
             - db_data:/var/lib/mysql
-            - ./init.sql:/var/lib/mysql/init.sql
+            - ./init.sql:/etc/init.sql
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: password
