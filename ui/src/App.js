@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import LoginBar from './Components/LoginBar';
 import MainPage from './Components/MainPage/MainPage';
+import './App.css';
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);

@@ -3,7 +3,6 @@ import os
 from flask import Flask
 import sqlalchemy as db
 
-
 app = Flask(__name__)
 
 db_host = os.environ['DB_HOST']
