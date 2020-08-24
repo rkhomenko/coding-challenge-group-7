@@ -7,7 +7,6 @@ from flask_httpauth import HTTPBasicAuth
 import jwt
 from werkzeug.security import generate_password_hash, check_password_hash
 
-# Get db params
 db_host = os.environ['DB_HOST']
 db_name = os.environ['DB_NAME']
 db_user = os.environ['DB_USER']
@@ -66,20 +65,23 @@ def verify_password(username_or_token, password):
     return True
 
 
-@app.route('/api/users', methods=['POST'])
+@app.route('/api/users', methods=['POST', 'GET'])
 def new_user():
-    username = request.json.get('username')
-    password = request.json.get('password')
-    if username is None or password is None:
-        abort(400)    # missing arguments
-    if User.query.filter_by(username=username).first() is not None:
-        abort(400)    # existing user
-    user = User(username=username)
-    user.hash_password(password)
-    db.session.add(user)
-    db.session.commit()
-    return (jsonify({'username': user.username}), 201,
-            {'Location': url_for('get_user', id=user.id, _external=True)})
+    try:
+        username = request.json.get('username')
+        password = request.json.get('password')
+        if username is None or password is None:
+            abort(400)    # missing arguments
+        if User.query.filter_by(username=username).first() is not None:
+            abort(400)    # existing user
+        user = User(username=username)
+        user.hash_password(password)
+        db.session.add(user)
+        db.session.commit()
+        return (jsonify({'username': user.username}), 201,
+                {'Location': url_for('get_user', id=user.id, _external=True)})
+    except Exception as e:
+        return str(e)
 
 
 @app.route('/api/users/<int:id>')
