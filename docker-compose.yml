@@ -1,9 +1,11 @@
 version: '3'
 services:
-    db-data:
+    db:
         image: mysql:5.7
+        command: --init-file /var/lib/mysql/init.sql
         volumes:
             - db_data:/var/lib/mysql
+            - ./init.sql:/var/lib/mysql/init.sql
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: password
@@ -11,20 +13,9 @@ services:
             MYSQL_USER: db_user
             MYSQL_PASSWORD: db_password
 
-    db-web:
-        image: mysql:5.7
-        volumes:
-            - db_web:/var/lib/mysql
-        restart: always
-        environment:
-            MYSQL_ROOT_PASSWORD: password
-            MYSQL_DATABASE: web
-            MYSQL_USER: db_user
-            MYSQL_PASSWORD: db_password
-
     web-service:
         depends_on:
-            - db-web
+            - db
         build: ./web-service
         ports:
             - "5000:5000"
@@ -36,7 +27,7 @@ services:
 
     data-service:
         depends_on:
-            - db-data
+            - db
         build: ./data-service
         ports:
             - "5050:5000"
@@ -52,5 +43,4 @@ services:
             - "7777:80"
 
 volumes:
-    db_web: {}
     db_data: {}
