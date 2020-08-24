@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import axios from 'axios';
 
-const LOGINURL = `http://localhost:4000/login`;
+const LOGINURL = `http://localhost:5000/api/users`;
 
 const LoginBar = props => {
     const [username, setUsername] = useState("");
