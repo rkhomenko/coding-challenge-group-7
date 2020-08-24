@@ -2,8 +2,8 @@ import time
 import numpy
 import random
 from datetime import datetime, timedelta
-import json
 from utils.Instrument import Instrument
+from utils.Deal import Deal
 
 instruments = ("Astronomica", "Borealis", "Celestial", "Deuteronic", "Eclipse",
     "Floral", "Galactia", "Heliosphere", "Interstella", "Jupiter", "Koronis", "Lunatic")
@@ -45,21 +45,18 @@ class RandomDealData:
         return instrumentList
 
     @staticmethod
-    def create_random_data(instrument_list):
+    def create_random_data(instrument_list) -> Deal:
         time.sleep(random.uniform(1,30)/100)
-        dealId = 20000
         instrument = instrument_list[numpy.random.randint(0, len(instrument_list))]
         cpty = counterparties[numpy.random.randint(0,len(counterparties))]
         type = 'B' if numpy.random.choice([True, False]) else 'S'
         quantity = int( numpy.power(1001, numpy.random.random()))
-        dealTime = datetime.now() - timedelta(days = 1)
-        dealId += 1
-        deal = {
-            'instrumentName' : instrument.name,
-            'cpty' : cpty,
-            'price' : instrument.calculate_next_price(type),
-            'type' : type,
-            'quantity' : quantity,
-            'time' : dealTime.strftime("%d-%b-%Y (%H:%M:%S.%f)"),
-            }
-        return json.dumps(deal)
+
+        deal = Deal(instrument=instrument.name,
+                    counter_party=cpty,
+                    price=instrument.calculate_next_price(type),
+                    type=type,
+                    quantity=quantity,
+                    time=datetime.utcnow())
+
+        return deal
