@@ -1,6 +1,6 @@
 version: '3'
 services:
-    db:
+    db-data:
         image: mysql:5.7
         volumes:
             - db_data:/var/lib/mysql
@@ -11,7 +11,20 @@ services:
             MYSQL_USER: db_user
             MYSQL_PASSWORD: db_password
 
+    db-web:
+        image: mysql:5.7
+        volumes:
+            - db_data:/var/lib/mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: web
+            MYSQL_USER: db_user
+            MYSQL_PASSWORD: db_password
+
     web-service:
+        depends_on:
+            - db-web
         build: ./web-service
         ports:
             - "5000:5000"
@@ -23,7 +36,7 @@ services:
 
     data-service:
         depends_on:
-            - db
+            - db-data
         build: ./data-service
         ports:
             - "5050:5000"
