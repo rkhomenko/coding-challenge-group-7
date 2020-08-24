@@ -1,6 +1,7 @@
 import React from "react";
 import SearchBar from './SearchBar';
 import DealDataTable from "./DealDataTable";
+import SupperMenu from "./SupperMenu";
 
   class MainPage extends React.Component {    
     GetData = () => {
@@ -22,11 +23,18 @@ import DealDataTable from "./DealDataTable";
         return deals;
     }
 
+    GetUser = () => {
+        let user = { name: "I'am a user" };
+        return user;
+    }
+
     render() {
+      let user = this.GetUser();
       let deals = this.GetData();
 
       return (
         <>
+          <SupperMenu user={user}/>
           <SearchBar/>
           <hr/>
           <DealDataTable deals={deals}/>
