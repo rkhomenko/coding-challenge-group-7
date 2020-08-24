@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import LoginPage from './Components/LoginPage/LoginPage';
 import MainPage from './Components/MainPage/MainPage'
 import './App.css';
+import './Components/MainPage/MainPage.css';
+import './Components/MainPage/DaelDataTable.css';
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
