@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-
-import './App.css';
+//import './App.css';
 import LoginPage from './Components/LoginPage/LoginPage';
 import MainPage from './Components/MainPage/MainPage'
 
@@ -20,7 +19,7 @@ function App() {
     <MainPage/>
   );
 
-  return (isLogged ?  mainPage : loginPage);
+  return (mainPage );
 }
 
 export default App;
