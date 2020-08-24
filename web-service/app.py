@@ -3,6 +3,8 @@ import time
 
 from flask import Flask, abort, request, jsonify, g, url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate, MigrateCommand
+from flask_script import Manager
 from flask_httpauth import HTTPBasicAuth
 import jwt
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -22,6 +24,7 @@ app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
 # extensions
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 auth = HTTPBasicAuth()
 
 
@@ -29,7 +32,7 @@ class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), index=True)
-    password_hash = db.Column(db.String(64))
+    password_hash = db.Column(db.String(1024))
 
     def hash_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -50,6 +53,13 @@ class User(db.Model):
         except:
             return
         return User.query.get(data['id'])
+
+
+db.create_all()
+db.session.commit()
+
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
 
 
 @auth.verify_password
@@ -127,10 +137,7 @@ def test_setup():
 
 
 if __name__ == '__main__':
-    if not os.path.exists('db.sqlite'):
-        db.create_all()
     user = User(username='user')
     user.hash_password('pass')
     db.session.add(user)
     db.session.commit()
-    app.run(debug=True)
