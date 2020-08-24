@@ -15,7 +15,7 @@ function App() {
     />
   );
   const loggedForm = (
-    <p>Logged</p>
+    <MainPage/>
   );
 
   return (
