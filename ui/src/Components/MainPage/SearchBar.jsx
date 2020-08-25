@@ -1,41 +1,69 @@
 import React from "react";
+import ReportModal from '../ReportModal/ReportModal'
 
 
   class SearchBar extends React.Component {
     constructor(props) {
       super(props);
 
-      this.state = {filterType: 'instrument'};
+      this.state = {filterType: 0};
+      this.state = {dealer: 0};
     }
 
     handleFilterTypeChanged = (event) => {
       this.setState({filterType: event.target.value});
     }
 
-    handleFilterTextChanged = (event) => {
-      this.setState({filterText: event.target.value});
+    handleDealerChanged = (event) => {
+          this.setState({dealer: event.target.value});
     }
 
-    handleSearchClick = () => {
-      alert(this.state.filterType);
-    }
 
     render() {
+      // axios request for them
+      let dealers = [
+        {name: "Anna", surname: "Agapova"},
+        {name: "Ivan", surname: "Ivanov"}
+      ];
+
+      let rows = dealers.map((dealer, i) => (
+              <option value={i}>{dealer.name} {dealer.surname}</option>
+      ));
+
+      // axios request for them
+      let instruments = [
+        {name: "Instrument name"},
+        {name: "Conterparty"},
+        {name: "Conterparty"}
+      ];
+
+      let rows2 = instruments.map((instrument, i) => (
+              <option value={i}>{instrument.name}</option>
+      ));
+
       return (
+
         <>
-          <div>
-            <p>If you need to see specific information, please use filters below</p>
-            <div>
-                <select value={this.state.filterType} onChange={this.handleFilterTypeChanged}>
-                  <option value='instrument'>Instrument name</option>
-                  <option value='conterparty'>Conterparty</option>
-                  <option value='price'>Price</option>
+          <div class="search_bar">
+            <p class="search_bar_instrustion">If you need to see specific information, please use filters below</p>
+            <div class="select_row">
+                <select class="select_row_item" 
+                  value={this.state.filterType} 
+                  onChange={this.handleFilterTypeChanged}
+                >
+                  {rows2}
+                </select>
+                <ReportModal
+                  dealer={this.state.dealer}
+                  instrument={this.state.filterType}
+                />
+                <select class="select_row_item" 
+                  value={this.state.dealer} 
+                  onChange={this.handleDealerChanged}
+                  >
+                    {rows}
                 </select>
             </div>
-          </div>
-          <div>
-            <input type="text" value={this.state.filterText} onChange={this.handleFilterTextChanged} placeholder='Enter the search filter'/>
-            <input type="submit" value="Search" onClick={this.handleSearchClick}/>
           </div>
        </>
       );

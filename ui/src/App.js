@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import LoginPage from './Components/LoginPage/LoginPage';
-import MainPage from './Components/MainPage/MainPage'
+import SearchBar from './Components/MainPage/MainPage'
 import './App.css';
-import './Components/MainPage/MainPage.css';
 import './Components/MainPage/DaelDataTable.css';
+import './Components/MainPage/SearchBar.css';
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
@@ -18,14 +18,14 @@ function App() {
     />
   );
   const loggedForm = (
-    <MainPage/>
+    <SearchBar/>
   );
 
   return (
     <>
     { isLogged ?  loggedForm : loginPage }
     
-    <MainPage/>
+    <SearchBar/>
     </>
     );
 }

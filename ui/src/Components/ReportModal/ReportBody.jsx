@@ -3,7 +3,7 @@ import {Form} from 'react-bootstrap';
 
 const ReportBody = props => {
 
-    //axios request with props.dealer
+    //axios request with props.dealer and props.instrument
 
     return (
         <div>
