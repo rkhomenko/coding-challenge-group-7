@@ -38,7 +38,7 @@ const LoginPage = props => {
     return (
         <form onSubmit={handleSubmit}>
             <input
-                class="form_input login"
+                className="form_input login"
                 type="text" 
                 placeholder="Login"
                 value={username}
@@ -46,7 +46,7 @@ const LoginPage = props => {
             />
             <br/>
             <input
-                class="form_input password"
+                className="form_input password"
                 type="text" 
                 placeholder="Password"
                 value={password}
@@ -54,8 +54,9 @@ const LoginPage = props => {
             />
             <br/>
             <button
-                class="form_input button"
-                type="submit">
+                className="form_input button"
+                type="submit"
+                onClick={event => handleSubmit(event)}>
                 Log In</button>
         </form>
     );
