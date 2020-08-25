@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import LoginPage from './Components/LoginPage/LoginPage';
-import SearchBar from './Components/MainPage/MainPage'
+import MainPage from './Components/MainPage/MainPage'
 import './App.css';
 import './Components/MainPage/DaelDataTable.css';
 import './Components/MainPage/SearchBar.css';
@@ -18,14 +18,12 @@ function App() {
     />
   );
   const loggedForm = (
-    <SearchBar/>
+    <MainPage/>
   );
 
   return (
     <>
     { isLogged ?  loggedForm : loginPage }
-    
-    <SearchBar/>
     </>
     );
 }
