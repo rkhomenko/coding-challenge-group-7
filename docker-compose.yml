@@ -19,6 +19,8 @@ services:
         build: ./web-service
         ports:
             - "5000:5000"
+        links:
+            - db:db
         environment:
             DB_HOST: db:3306
             DB_USER: db_user
@@ -31,6 +33,8 @@ services:
         build: ./data-service
         ports:
             - "5050:5000"
+        links:
+            - db:db
         environment:
             DB_HOST: db:3306
             DB_USER: db_user
