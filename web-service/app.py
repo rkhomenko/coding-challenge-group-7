@@ -58,6 +58,9 @@ class User(db.Model):
 
 
 db.create_all()
+user = User(username='user')
+user.hash_password('pass')
+db.session.add(user)
 db.session.commit()
 
 manager = Manager(app)
@@ -139,7 +142,4 @@ def test_setup():
 
 
 if __name__ == '__main__':
-    user = User(username='user')
-    user.hash_password('pass')
-    db.session.add(user)
     db.session.commit()

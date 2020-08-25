@@ -52,7 +52,6 @@ def create_app():
 
     @app.route('/sse-stream')
     def sse_stream():
-        theHeaders = {"X-Accel-Buffering": "False"}
         rdd = RandomDealData()
         instrList = rdd.create_instrument_list()
 
@@ -66,7 +65,6 @@ def create_app():
                     yield 'data:{}\n\n'.format(json.dumps(deal.serialize))
 
         resp = Response(eventStream(), status=200, mimetype="text/event-stream")
-        resp.headers["X-Accel-Buffering"] = "False"
         return resp
 
     return app
